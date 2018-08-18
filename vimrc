@@ -87,7 +87,10 @@ call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 
 " TagList for Ctags
-Plug 'vim-scripts/taglist.vim'
+" Plug 'vim-scripts/taglist.vim'
+
+" Tagbar for Ctags (maybe better than taglist)
+Plug 'majutsushi/tagbar'
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 Plug 'junegunn/vim-easy-align'
@@ -101,6 +104,12 @@ Plug 'junegunn/fzf.vim'
 
 " Ag vim script to search string ,like ack ,but faster
 Plug 'vim-scripts/ag.vim'
+
+" Incress ? and / vim default command
+Plug 'haya14busa/incsearch.vim'
+
+" vim-multiple-cursors
+Plug 'terryma/vim-multiple-cursors'
 
 " Initialize plugin system
 call plug#end()
@@ -140,13 +149,19 @@ nnoremap <S-w> <C-w>w<CR>
 " zo:open a folding
 " zc:close a folding
 "
-let Tlist_Ctag_Cmd         ='ctags'
-let Tlist_Show_One_File    =1     "if different ,show multi file tag,or itself
-let Tlist_WinWidt          =28    "window width
-let Tlist_Exit_OnlyWindow  =1     "the last win is Taglist ,exit vim
-let Tlist_Use_Right_Window =1     "show on the right
-let Tlist_Use_Left_Window  =0     "show on the left
-nnoremap <F3> :silent! TlistToggle<CR>
+"let Tlist_Ctag_Cmd         ='ctags'
+"let Tlist_Show_One_File    =1     "if different ,show multi file tag,or itself
+"let Tlist_WinWidt          =28    "window width
+"let Tlist_Exit_OnlyWindow  =1     "the last win is Taglist ,exit vim
+"let Tlist_Use_Right_Window =1     "show on the right
+"let Tlist_Use_Left_Window  =0     "show on the left
+"nnoremap <F3> :silent! TlistToggle<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+" TAGBAR
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <F3> :TagbarToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-easy-align
@@ -220,3 +235,32 @@ nnoremap <silent> <Leader>b :Buffers<CR>
 "	v    to open in vertical split
 "	gv   to open in vertical split silently
 "	q    to close the quickfix window
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Incsearch
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+" usb <TAB> to search the next one
+" usb <S-TAB> to search the pre one
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+" doesn't move the cursor
+map g/ <Plug>(incsearch-stay)
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-multiple-cursors
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+" It's great for quick refactoring
+"
+let g:multi_cursor_use_default_mapping=0
+
+" Default mapping
+let g:multi_cursor_start_word_key      = '<C-n>'
+let g:multi_cursor_select_all_word_key = '<A-n>'
+let g:multi_cursor_start_key           = 'g<C-n>'
+let g:multi_cursor_select_all_key      = 'g<A-n>'
+" select the next key like first
+let g:multi_cursor_next_key            = '<C-n>'
+" return the pre one key
+let g:multi_cursor_prev_key            = '<C-p>'
+let g:multi_cursor_skip_key            = '<C-x>'
+let g:multi_cursor_quit_key            = '<Esc>'
