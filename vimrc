@@ -1,4 +1,17 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""
+" Necessary Install First Using Vim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 1. ctags
+"   sudo apt-get install ctags
+" 2. cscope
+"   sudo apt-get install cscope
+" 3. fzf
+"   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+"   ~/.fzf/install
+" 4. ag
+"   sudo apt-get install silversearcher-ag
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Default Setting For Vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 set hlsearch
@@ -84,6 +97,7 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " Ag vim script to search string ,like ack ,but faster
 Plug 'vim-scripts/ag.vim'
@@ -187,7 +201,7 @@ nnoremap <F1> :silent! YcmGenerateConfig<CR>
 " 	:FZF
 " Look for files under your home directory
 " 	:FZF ~
-nnoremap <silent> <Leader>f :FZF<CR>
+nnoremap <silent> <Leader>f :Files<CR>
 " Search the Buffers
 nnoremap <silent> <Leader>b :Buffers<CR>
 
