@@ -235,6 +235,7 @@ nnoremap <silent> <Leader>b :Buffers<CR>
 "	v    to open in vertical split
 "	gv   to open in vertical split silently
 "	q    to close the quickfix window
+nnoremap <silent> <Leader>g :Ag 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " Incsearch
