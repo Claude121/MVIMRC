@@ -37,6 +37,15 @@ nmap <leader>wq :wq!<CR>
 nnoremap <F2> :g/^\s*$/d<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
+" useful shell command
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+" change tab to space :
+"    expand -t 4 filename > newfile
+" change space to tab :
+"    unexpand -t 4 filename > newfile
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  Cscope and Ctags setting
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 "   ctags :
