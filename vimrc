@@ -12,6 +12,49 @@
 "   sudo apt-get install silversearcher-ag
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""
+" Advanced Vim Usage
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 1. buffer
+"   1. :ls
+"    list all available buffer
+"   2. :bn
+"    checkout to releated buffer
+"   3. :badd file
+"    add a file to buffer
+"   4. :bdn
+"    delete releated buffer
+" 2. window
+"   1. :sp filename
+"    open a Horizontal window
+"   2. :vsp filename
+"    open a vertical
+"   3. ctrl + w + h/j/k/l
+"    move to other window (left/down/up/right)
+"   4. :nwinc +/-
+"    add/del current window n row
+"   5. :nwinc >/<
+"    add/del current window n column
+" 3. tab
+"   1. :tabe file
+"    edit the releated file tab
+"   2. gT/gt
+"    switchrto other tab
+"   3. :tabe
+"    list all tabs
+"   4. ngT
+"    switch to n tab
+"   5. tabc
+"    close current tab
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+" useful shell command
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+" change tab to space :
+"    expand -t 4 filename > newfile
+" change space to tab :
+"    unexpand -t 4 filename > newfile
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Default Setting For Vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 set hlsearch
@@ -36,15 +79,14 @@ nmap <leader>wq :wq!<CR>
 " remove the blank space
 nnoremap <F2> :g/^\s*$/d<CR>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-" useful shell command
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-" change tab to space :
-"    expand -t 4 filename > newfile
-" change space to tab :
-"    unexpand -t 4 filename > newfile
-
-
+"go to lowest tap
+nnoremap <C-l> gt
+"go to hightest tap
+nnoremap <C-h> Gt
+"go to the bookmark
+nnoremap <leader>t :tabe<CR>
+"shift from a win to another
+nnoremap <S-w> <C-w>w<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 "  Cscope and Ctags setting
 """""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -133,16 +175,8 @@ let NERDTreeShowLineNumbers=1
 let NERDTreeWinpos='left'
 let NERDTreeWinSize=31
 let NERDTreeShowBookmarks=1 "show bookmark when nerdtree open
-"go to lowest tap
-nnoremap <C-l> gt
-"go to hightest tap
-nnoremap <C-h> Gt
-"go to the bookmark
-nnoremap <leader>t :tabe<CR>
 "Open the NERDTree
 nnoremap <F2> :silent! NERDTreeToggle<CR>
-"shift from a win to another
-nnoremap <S-w> <C-w>w<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " TAGLIST
@@ -244,7 +278,7 @@ nnoremap <silent> <Leader>b :Buffers<CR>
 "	v    to open in vertical split
 "	gv   to open in vertical split silently
 "	q    to close the quickfix window
-nnoremap <silent> <Leader>g :Ag 
+nmap <leader>g :norm yiw<CR>:Ag! -t -Q "<C-R>""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " Incsearch
