@@ -82,13 +82,10 @@ nmap <leader>w  :w!<CR>
 nmap <leader>wq :wq!<CR>
 " remove the blank space
 nnoremap <F2> :g/^\s*$/d<CR>
-
-"go to lowest tap
-nnoremap <C-l> gt
-"go to hightest tap
-nnoremap <C-h> Gt
 "open the new tab
 nnoremap <leader>t :tabe 
+"shift from a tab to another
+nnoremap <S-t> gT
 "shift from a win to another
 nnoremap <S-w> <C-w>w<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""
