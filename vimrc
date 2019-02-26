@@ -74,6 +74,10 @@ let mapleader =','
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " Some Quickly Action For Vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""
+" Internal Function Define
+"
+
+"----------------------------------------------------
 nmap <leader>w  :w!<CR>
 nmap <leader>wq :wq!<CR>
 " remove the blank space
@@ -83,8 +87,8 @@ nnoremap <F2> :g/^\s*$/d<CR>
 nnoremap <C-l> gt
 "go to hightest tap
 nnoremap <C-h> Gt
-"go to the bookmark
-nnoremap <leader>t :tabe<CR>
+"open the new tab
+nnoremap <leader>t :tabe 
 "shift from a win to another
 nnoremap <S-w> <C-w>w<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""
