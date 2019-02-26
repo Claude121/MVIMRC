@@ -38,7 +38,7 @@
 "   1. :tabe file
 "    edit the releated file tab
 "   2. gT/gt
-"    switchrto other tab
+"    switch to other tab
 "   3. :tabe
 "    list all tabs
 "   4. ngT
@@ -74,19 +74,26 @@ let mapleader =','
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " Some Quickly Action For Vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""
-" Internal Function Define
-"
-
-"----------------------------------------------------
-nmap <leader>w  :w!<CR>
-nmap <leader>wq :wq!<CR>
+" saving the file
+nmap <leader>w  :w<CR>
+" exit the file with saving
+nmap <leader>wq :wq<CR>
+" exit the file without saving
+nmap <leader>q :q!<CR>
 " remove the blank space
 nnoremap <F2> :g/^\s*$/d<CR>
-"open the new tab
-nnoremap <leader>t :tabe 
-"shift from a tab to another
+
+"" MAPPING BUFFER
+nnoremap <leader>ba :babd 
+nnoremap <leader>bq :bd 
+nnoremap <S-b> :b
+"" MAPPING TAB
+nnoremap <leader>ta :tabe 
+nnoremap <leader>tq :tabc<CR>
 nnoremap <S-t> gT
-"shift from a win to another
+"" MAPPING WINDOW
+nnoremap <leader>wh :sp<CR>
+nnoremap <leader>wv :vsp<CR>
 nnoremap <S-w> <C-w>w<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 "  Cscope and Ctags setting
