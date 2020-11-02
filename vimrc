@@ -77,7 +77,7 @@ fu DefaultSetting()
     set nocompatible
     filetype off
     set syntax=on
-    let mapleader =','
+    let g:mapleader =','
 endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
