@@ -1,7 +1,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable Func
 """""""""""""""""""""""""""""""""""""""""""""""""""""
-let YCM_FUNCTION_ENABLE=0
+let g:YCM_FUNCTION_ENABLE=1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " Necessary Install First Using Vim
@@ -64,44 +64,48 @@ let YCM_FUNCTION_ENABLE=0
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " Default Setting For Vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""
-set hlsearch
-set nu
-set fileencoding=utf-8
-set fileencodings=utf-8,gb18030,gb2312,gbk,big5
-set ts=4
-set expandtab
-set autoindent
-set mouse=n
+fu DefaultSetting()
+    set hlsearch
+    set nu
+    set fileencoding=utf-8
+    set fileencodings=utf-8,gb18030,gb2312,gbk,big5
+    set ts=4
+    set expandtab
+    set autoindent
+    set mouse=n
 
-set nocompatible
-filetype off
-set syntax=on
-let mapleader =','
+    set nocompatible
+    filetype off
+    set syntax=on
+    let mapleader =','
+endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " Some Quickly Action For Vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""
-" saving the file
-nmap <leader>w  :w<CR>
-" exit the file with saving
-nmap <leader>wq :wq<CR>
-" exit the file without saving
-nmap <leader>q :q!<CR>
-" remove the blank space
-nnoremap <F2> :g/^\s*$/d<CR>
+fu QuicklyActionMap()
+    " saving the file
+    nmap <leader>w  :w<CR>
+    " exit the file with saving
+    nmap <leader>wq :wq<CR>
+    " exit the file without saving
+    nmap <leader>q :q!<CR>
+    " remove the blank space
+    nnoremap <F2> :g/^\s*$/d<CR>
+    "" MAPPING BUFFER
+    nnoremap <leader>ba :babd
+    nnoremap <leader>bq :bd
+    nnoremap <S-b> :b
+    "" MAPPING TAB
+    nnoremap <leader>ta :tabe
+    nnoremap <leader>tq :tabc<CR>
+    nnoremap <S-t> gT
+    "" MAPPING WINDOW
+    nnoremap <leader>wh :sp<CR>
+    nnoremap <leader>wv :vsp<CR>
+    nnoremap <S-w> <C-w>w<CR>
+endfunction
 
-"" MAPPING BUFFER
-nnoremap <leader>ba :babd 
-nnoremap <leader>bq :bd 
-nnoremap <S-b> :b
-"" MAPPING TAB
-nnoremap <leader>ta :tabe 
-nnoremap <leader>tq :tabc<CR>
-nnoremap <S-t> gT
-"" MAPPING WINDOW
-nnoremap <leader>wh :sp<CR>
-nnoremap <leader>wv :vsp<CR>
-nnoremap <S-w> <C-w>w<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 "  Cscope and Ctags setting
 """""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -130,70 +134,63 @@ nnoremap <S-w> <C-w>w<CR>
 "   reset: Reinit all connections(Usage: reset)
 "   show:  Show connections (Usage: show)
 "
-nmap <C-]> g]
-nmap <leader>sa :cs add cscope.out<cr>
-nmap <leader>ss :cs find s <C-R>=expand("<cword>")<cr><cr>
-nmap <leader>sg :cs find g <C-R>=expand("<cword>")<cr><cr>
-nmap <leader>sc :cs find c <C-R>=expand("<cword>")<cr><cr>
-nmap <leader>st :cs find t <C-R>=expand("<cword>")<cr><cr>
-nmap <leader>se :cs find e <C-R>=expand("<cword>")<cr><cr>
-nmap <leader>sf :cs find f <C-R>=expand("<cfile>")<cr><cr>
-nmap <leader>si :cs find i <C-R>=expand("<cfile>")<cr><cr>
-nmap <leader>sd :cs find d <C-R>=expand("<cword>")<cr><cr>
-
-nnoremap <F5> :!ctags -R --languages=c,c++<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin Manager 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
-" Specify a directory for plugins
-call plug#begin('~/.vim/plugged')
+fu PluginManagerLoad()
+    " Specify a directory for plugins
+    call plug#begin('~/.vim/plugged')
 
-" On-demand loading
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+    " On-demand loading
+    Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 
-" TagList for Ctags
-" Plug 'vim-scripts/taglist.vim'
+    " Mark script
+    Plug 'dimasg/vim-mark'
 
-" Tagbar for Ctags (maybe better than taglist)
-Plug 'majutsushi/tagbar'
+    " TagList for Ctags
+    " Plug 'vim-scripts/taglist.vim'
 
-" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
-Plug 'junegunn/vim-easy-align'
+    " Tagbar for Ctags (maybe better than taglist)
+    Plug 'majutsushi/tagbar'
 
-" Using a non-master branch
-if YCM_FUNCTION_ENABLE==1
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer',  'for': ['c', 'cpp'] }
-endif
+    " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+    Plug 'junegunn/vim-easy-align'
 
-" Plugin outside ~/.vim/plugged with post-update hook
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+    " Using a non-master branch
+    if g:YCM_FUNCTION_ENABLE==1
+    Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer',  'for': ['c', 'cpp'] }
+    endif
 
-" Ag vim script to search string ,like ack ,but faster
-Plug 'vim-scripts/ag.vim'
+    " Plugin outside ~/.vim/plugged with post-update hook
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
 
-" Incress ? and / vim default command
-Plug 'haya14busa/incsearch.vim'
+    " Ag vim script to search string ,like ack ,but faster
+    Plug 'vim-scripts/ag.vim'
 
-" vim-multiple-cursors
-Plug 'terryma/vim-multiple-cursors'
+    " Incress ? and / vim default command
+    Plug 'haya14busa/incsearch.vim'
 
-" Initialize plugin system
-call plug#end()
+    " vim-multiple-cursors
+    Plug 'terryma/vim-multiple-cursors'
+
+    " Initialize plugin system
+    call plug#end()
+endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERD TREE Setting
 """""""""""""""""""""""""""""""""""""""""""""""""""""
-let NERDChrismasTree=1 "Beautiful
-let NERDTreeShowFiles=1
-let NERDTreeShowHidden=1
-let NERDTreeShowLineNumbers=1
-let NERDTreeWinpos='left'
-let NERDTreeWinSize=31
-let NERDTreeShowBookmarks=1 "show bookmark when nerdtree open
-"Open the NERDTree
-nnoremap <F2> :silent! NERDTreeToggle<CR>
+fu NerdTreeSetting()
+    let NERDChrismasTree=1 "Beautiful
+    let NERDTreeShowFiles=1
+    let NERDTreeShowHidden=1
+    let NERDTreeShowLineNumbers=1
+    let NERDTreeWinpos='left'
+    let NERDTreeWinSize=31
+    let NERDTreeShowBookmarks=1 "show bookmark when nerdtree open
+endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " TAGLIST
@@ -216,12 +213,6 @@ nnoremap <F2> :silent! NERDTreeToggle<CR>
 "let Tlist_Use_Right_Window =1     "show on the right
 "let Tlist_Use_Left_Window  =0     "show on the left
 "nnoremap <F3> :silent! TlistToggle<CR>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-" TAGBAR
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <F3> :TagbarToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-easy-align
@@ -254,41 +245,35 @@ nmap <F3> :TagbarToggle<CR>
 "   -<Space> : Around the last occurrences
 "   <Enter><Enter>2<Space> :Center-alignment around the 2nd occurrences
 "
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " YCM
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " add config for YOUCOMPLETEME
-if YCM_FUNCTION_ENABLE==1
-let g:ycm_global_ycm_extra_conf='~/.vim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
-let g:ycm_add_preview_to_completeopt = 0
-let g:ycm_show_diagnostics_ui = 0
-let g:ycm_server_log_level = 'info'
-let g:ycm_min_num_identifier_candidate_chars = 2
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_complete_in_strings=1
-let g:ycm_key_invoke_completion = '<c-x>'
-set completeopt=menu,menuone
+fu  YcmSetting()
+    let g:ycm_global_ycm_extra_conf='~/.vim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
+    let g:ycm_add_preview_to_completeopt = 0
+    let g:ycm_show_diagnostics_ui = 0
+    let g:ycm_server_log_level = 'info'
+    let g:ycm_min_num_identifier_candidate_chars = 2
+    let g:ycm_collect_identifiers_from_comments_and_strings = 1
+    let g:ycm_complete_in_strings=1
+    let g:ycm_key_invoke_completion = '<c-x>'
+    set completeopt=menu,menuone
 
-noremap <c-x> <NOP>
-
-let g:ycm_semantic_triggers =  {
-			\ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
-			\ 'cs,lua,javascript': ['re!\w{2}'],
-			\ }
-let g:ycm_filetype_whitelist = {
-			\ "c":1,
-			\ "cpp":1,
-			\ "objc":1,
-			\ "sh":1,
-			\ "zsh":1,
-			\ "zimbu":1,
-			\ }
-endif
+    let g:ycm_semantic_triggers =  {
+                \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+                \ 'cs,lua,javascript': ['re!\w{2}'],
+                \ }
+    let g:ycm_filetype_whitelist = {
+                \ "c":1,
+                \ "cpp":1,
+                \ "objc":1,
+                \ "sh":1,
+                \ "zsh":1,
+                \ "zimbu":1,
+                \ }
+endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " fzf (fuzzy finder)
@@ -300,9 +285,6 @@ endif
 " 	:FZF
 " Look for files under your home directory
 " 	:FZF ~
-nnoremap <silent> <Leader>f :Files<CR>
-" Search the Buffers
-nnoremap <silent> <Leader>b :Buffers<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ag Search (Like Ack , But faster)
@@ -319,33 +301,88 @@ nnoremap <silent> <Leader>b :Buffers<CR>
 "	v    to open in vertical split
 "	gv   to open in vertical split silently
 "	q    to close the quickfix window
-nmap <leader>g :norm yiw<CR>:Ag! -t -Q "<C-R>""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Incsearch
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-" usb <TAB> to search the next one
-" usb <S-TAB> to search the pre one
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-" doesn't move the cursor
-map g/ <Plug>(incsearch-stay)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-multiple-cursors
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " It's great for quick refactoring
 "
-let g:multi_cursor_use_default_mapping=0
+fu VimMultipleSettiing()
+    let g:multi_cursor_use_default_mapping=0
 
-" Default mapping
-let g:multi_cursor_start_word_key      = '<C-n>'
-let g:multi_cursor_select_all_word_key = '<A-n>'
-let g:multi_cursor_start_key           = 'g<C-n>'
-let g:multi_cursor_select_all_key      = 'g<A-n>'
-" select the next key like first
-let g:multi_cursor_next_key            = '<C-n>'
-" return the pre one key
-let g:multi_cursor_prev_key            = '<C-p>'
-let g:multi_cursor_skip_key            = '<C-x>'
-let g:multi_cursor_quit_key            = '<Esc>'
+    " Default mapping
+    let g:multi_cursor_start_word_key      = '<C-n>'
+    let g:multi_cursor_select_all_word_key = '<A-n>'
+    let g:multi_cursor_start_key           = 'g<C-n>'
+    let g:multi_cursor_select_all_key      = 'g<A-n>'
+    " select the next key like first
+    let g:multi_cursor_next_key            = '<C-n>'
+    " return the pre one key
+    let g:multi_cursor_prev_key            = '<C-p>'
+    let g:multi_cursor_skip_key            = '<C-x>'
+    let g:multi_cursor_quit_key            = '<Esc>'
+endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Mapping
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+fu Mapping()
+    " Cscope
+    nmap <C-]> g]
+    nmap <leader>sa :cs add cscope.out<cr>
+    nmap <leader>ss :cs find s <C-R>=expand("<cword>")<cr><cr>
+    nmap <leader>sg :cs find g <C-R>=expand("<cword>")<cr><cr>
+    nmap <leader>sc :cs find c <C-R>=expand("<cword>")<cr><cr>
+    nmap <leader>st :cs find t <C-R>=expand("<cword>")<cr><cr>
+    nmap <leader>se :cs find e <C-R>=expand("<cword>")<cr><cr>
+    nmap <leader>sf :cs find f <C-R>=expand("<cfile>")<cr><cr>
+    nmap <leader>si :cs find i <C-R>=expand("<cfile>")<cr><cr>
+    nmap <leader>sd :cs find d <C-R>=expand("<cword>")<cr><cr>
+
+    " Ctags
+    nnoremap <F5> :!ctags -R --languages=c,c++ &> /dev/null &<cr>
+
+    " Open the NERDTree
+    nnoremap <F2> :silent! NERDTreeToggle<CR>
+
+    " TAGBAR
+    nmap <F3> :TagbarToggle<CR>
+
+    " Ag
+    nmap <leader>g :norm yiw<CR>:Ag! -t -Q "<C-R>""
+
+    " Incsearch
+    "   usb <TAB> to search the next one
+    "   usb <S-TAB> to search the pre one
+    map /  <Plug>(incsearch-forward)
+    map ?  <Plug>(incsearch-backward)
+    " doesn't move the cursor
+    map g/ <Plug>(incsearch-stay)
+
+    " fuzzy find
+    nnoremap <silent> <Leader>f :Files<CR>
+    " Search the Buffers
+    nnoremap <silent> <Leader>b :Buffers<CR>
+
+    " YCM
+    if g:YCM_FUNCTION_ENABLE==1
+    noremap <c-x> <NOP>
+    endif
+
+    " vim-easy-align
+    " Start interactive EasyAlign in visual mode (e.g. vipga)
+    xmap ga <Plug>(EasyAlign)
+    " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+    nmap ga <Plug>(EasyAlign)
+endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Main
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+:call DefaultSetting()
+:call QuicklyActionMap()
+:call PluginManagerLoad()
+:call NerdTreeSetting()
+:call YcmSetting()
+:call VimMultipleSettiing()
+:call Mapping()
