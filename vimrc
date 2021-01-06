@@ -65,19 +65,28 @@ let g:YCM_FUNCTION_ENABLE=1
 " Default Setting For Vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 fu DefaultSetting()
-    set hlsearch
-    set nu
-    set fileencoding=utf-8
+    set hlsearch " 高亮搜索
+    set nu       " 显示行号
     set fileencodings=utf-8,gb18030,gb2312,gbk,big5
-    set ts=4
+
+    " tab 按键拓展为空格
     set expandtab
-    set autoindent
-    set mouse=n
+    set ts=4
+
+    "自动对齐
+    "set autoindent     "自动换行
+    "set smartindent    "智能对齐
+    set cindent        " c/c++/java对齐
+    set shiftwidth=4   "对齐宽度
+
+    " 鼠标模式
+    set mouse=a
 
     set nocompatible
     filetype off
     set syntax=on
     let g:mapleader =','
+    set ignorecase " 忽略大小写
 endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -147,6 +156,9 @@ fu PluginManagerLoad()
 
     " Mark script
     Plug 'dimasg/vim-mark'
+
+    " auto gen ctags tags file
+    Plug 'ludovicchabant/vim-gutentags'
 
     " TagList for Ctags
     " Plug 'vim-scripts/taglist.vim'
@@ -341,6 +353,8 @@ fu Mapping()
 
     " Ctags
     nnoremap <F5> :!ctags -R --languages=c,c++ &> /dev/null &<cr>
+    " preview current tags
+    nnoremap <c-p> <C-W>}
 
     " Open the NERDTree
     nnoremap <F2> :silent! NERDTreeToggle<CR>
@@ -374,6 +388,26 @@ fu Mapping()
     xmap ga <Plug>(EasyAlign)
     " Start interactive EasyAlign for a motion/text object (e.g. gaip)
     nmap ga <Plug>(EasyAlign)
+
+    "gutentags
+    " gutentags搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归 "
+    let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
+
+    " 所生成的数据文件的名称 "
+    let g:gutentags_ctags_tagfile = '.tags'
+
+    " 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
+    let s:vim_tags = expand('~/.cache/tags')
+    let g:gutentags_cache_dir = s:vim_tags
+    " 检测 ~/.cache/tags 不存在就新建 "
+    if !isdirectory(s:vim_tags)
+       silent! call mkdir(s:vim_tags, 'p')
+       endif
+
+       " 配置 ctags 的参数 "
+       let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+       let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
+       let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
