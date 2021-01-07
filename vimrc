@@ -80,7 +80,7 @@ fu DefaultSetting()
     set shiftwidth=4   "对齐宽度
 
     " 鼠标模式
-    set mouse=a
+    set mouse=n
 
     set nocompatible
     filetype off
