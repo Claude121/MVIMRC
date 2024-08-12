@@ -359,6 +359,8 @@ fu PluginManagerLoad()
     Plug 'scrooloose/nerdcommenter'
 
     Plug 'airblade/vim-gitgutter'
+
+    Plug 'guns/xterm-color-table.vim'
     " Initialize plugin system
     call plug#end()
 endfunction
